@@ -11,5 +11,10 @@ namespace DesafioVibe.Views
         {
             InitializeComponent();
         }
+
+        private void btnProfileClicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new ProfilePage());
+        }
     }
 }

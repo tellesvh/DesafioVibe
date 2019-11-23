@@ -9,6 +9,7 @@ using DesafioVibe.Webservice;
 using DesafioVibe.Models;
 using System.Linq;
 using DesafioVibe.Util;
+using MonkeyCache.LiteDB;
 
 namespace DesafioVibe.ViewModels
 {
@@ -68,6 +69,8 @@ namespace DesafioVibe.ViewModels
 
                 if (loginResponse.StatusCode == 200)
                 {
+                    Barrel.Current.Add(Constants.USER_KEY, loginResponse.Key, TimeSpan.Zero);
+                    Barrel.Current.Add(Constants.USER_CPF, CPF, TimeSpan.Zero);
                     await Application.Current.MainPage.Navigation.PushAsync(new WelcomePage());
                 } else
                 {

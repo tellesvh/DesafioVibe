@@ -4,7 +4,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="DesafioVibe.Views.WelcomePage"
     Title="Bem vindo(a)!"
+    NavigationPage.BackButtonTitle=""
     NavigationPage.HasBackButton="False">
+    <ContentPage.ToolbarItems> 
+        <ToolbarItem Text="Perfil" Clicked="btnProfileClicked"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
             <Label

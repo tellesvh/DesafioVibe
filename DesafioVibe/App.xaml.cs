@@ -1,5 +1,6 @@
 ﻿using Xamarin.Forms;
 using DesafioVibe.Views;
+using MonkeyCache.LiteDB;
 
 namespace DesafioVibe
 {
@@ -9,7 +10,17 @@ namespace DesafioVibe
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new LoginPage());
+            Barrel.ApplicationId = "DesafioVibe";
+
+            string userKey = Barrel.Current.Get<string>(Constants.USER_KEY);
+
+            if (userKey != null)
+            {
+                MainPage = new NavigationPage(new WelcomePage());
+            } else
+            {
+                MainPage = new NavigationPage(new LoginPage());
+            }
         }
 
         protected override void OnStart()
