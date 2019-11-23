@@ -5,15 +5,21 @@ using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 using DesafioVibe.Views;
+using DesafioVibe.Webservice;
+using DesafioVibe.Models;
+using System.Linq;
+using DesafioVibe.Util;
 
 namespace DesafioVibe.ViewModels
 {
     public class LoginViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        RestService _restService;
 
         public LoginViewModel()
         {
+            _restService = new RestService();
         }
 
         private string cpf;
@@ -46,20 +52,27 @@ namespace DesafioVibe.ViewModels
             }
         }
 
-        private void Login()
+        private async void Login()
         {
             if (string.IsNullOrEmpty(CPF) || string.IsNullOrEmpty(Password))
-                Application.Current.MainPage.DisplayAlert("Valores Vazios", "Por favor, verifique se todos os campos estão preenchidos.", "OK");
+                await Application.Current.MainPage.DisplayAlert("Valores Vazios", "Por favor, verifique se todos os campos estão preenchidos.", "OK");
             else
             {
-                // TODO Fazer requisição
-                if (CPF == "950" && Password == "12345")
+                MD5Helper md5 = new MD5Helper();
+                LoginModel login = new LoginModel
                 {
-                    // Application.Current.MainPage.DisplayAlert("Login bem sucedido!", "", "OK");
-                    Application.Current.MainPage.Navigation.PushAsync(new WelcomePage());
+                    cpf = new string(CPF.Where(char.IsDigit).ToArray()),
+                    senha = md5.CreateMD5(Password)
+                };
+                LoginResponse loginResponse = await _restService.LogUserIn(login);
+
+                if (loginResponse.StatusCode == 200)
+                {
+                    await Application.Current.MainPage.Navigation.PushAsync(new WelcomePage());
+                } else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Falha no login.", loginResponse.Message, "OK");
                 }
-                else
-                    Application.Current.MainPage.DisplayAlert("Falha no login.", "Por favor, entre tente novamente.", "OK");
             }
         }
     }
