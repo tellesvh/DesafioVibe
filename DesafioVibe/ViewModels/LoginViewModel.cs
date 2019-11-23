@@ -16,14 +16,14 @@ namespace DesafioVibe.ViewModels
         {
         }
 
-        private string email;
-        public string Email
+        private string cpf;
+        public string CPF
         {
-            get { return email; }
+            get { return cpf; }
             set
             {
-                email = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("Email"));
+                cpf = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("CPF"));
             }
         }
 
@@ -48,12 +48,12 @@ namespace DesafioVibe.ViewModels
 
         private void Login()
         {
-            if (string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Password))
+            if (string.IsNullOrEmpty(CPF) || string.IsNullOrEmpty(Password))
                 Application.Current.MainPage.DisplayAlert("Valores Vazios", "Por favor, verifique se todos os campos estão preenchidos.", "OK");
             else
             {
                 // TODO Fazer requisição
-                if (Email == "abc@gmail.com" && Password == "1234")
+                if (CPF == "950" && Password == "12345")
                 {
                     // Application.Current.MainPage.DisplayAlert("Login bem sucedido!", "", "OK");
                     Application.Current.MainPage.Navigation.PushAsync(new WelcomePage());
