@@ -41,6 +41,35 @@ namespace DesafioVibe.Webservice
             return loginResponse;
         }
 
+        public async Task<LoginResponse> SignUserUp(UserModel user)
+        {
+            LoginResponse signupResponse = null;
+            try
+            {
+                string serializedObject = JsonConvert.SerializeObject(user);
+                HttpContent contentPost = new StringContent(serializedObject, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await _client.PostAsync("Usuario", contentPost);
+
+                string data = await response.Content.ReadAsStringAsync();
+                signupResponse = JsonConvert.DeserializeObject<LoginResponse>(data);
+
+                if (!string.IsNullOrEmpty(data))
+                    signupResponse.StatusCode = (int)response.StatusCode;
+                else
+                    signupResponse = new LoginResponse
+                    {
+                        StatusCode = 200
+                    };
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("\tERROR {0}", ex.Message);
+            }
+
+            return signupResponse;
+        }
+
         public async Task<UserResponse> GetUserInfo()
         {
             UserResponse userResponse = null;

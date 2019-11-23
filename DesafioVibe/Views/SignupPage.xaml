@@ -3,15 +3,18 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:behaviorPack="clr-namespace:Xamarin.Forms.BehaviorValidationPack;assembly=Xamarin.Forms.BehaviorValidationPack"
-    x:Class="DesafioVibe.Views.LoginPage"
-    NavigationPage.BackButtonTitle=""
-    NavigationPage.HasBackButton="False"
-    Title="Login">
+    Title="Cadastro"
+    x:Class="DesafioVibe.Views.SignupPage">
     <ContentPage.Content>
         <StackLayout
-            Padding="16,0,16,100"
-            VerticalOptions="Center"
+            Padding="16,16,16,100"
             >
+            <Entry
+                x:Name="Name"
+                Placeholder="Nome"
+                ReturnType="Next"
+                Text="{Binding Name}"
+                Keyboard="Text"/>
             <Entry
                 x:Name="CPF"
                 Placeholder="CPF"
@@ -23,25 +26,28 @@
                 </Entry.Behaviors>
             </Entry>
             <Entry
+                x:Name="Birthday"
+                Placeholder="Data de Aniversário"
+                ReturnType="Next"
+                Text="{Binding Birthday}"
+                Keyboard="Numeric">
+                <Entry.Behaviors>
+                    <behaviorPack:MaskedBehavior Mask="XX/XX/XXXX" />
+                </Entry.Behaviors>
+            </Entry>
+            <Entry
                 x:Name="Password"
                 Text="{Binding Password}"
                 Placeholder="Senha"
                 ReturnType="Go"
                 IsPassword="True" />
             <Button
-                x:Name="btnLogin"
-                Text="Login"
-                Command="{Binding LoginCommand}"
-                HorizontalOptions="FillAndExpand"
-                BackgroundColor="#051fa3"
-                TextColor="#51feda"
-                />
-            <Button
                 x:Name="btnSignup"
                 Text="Cadastre-se"
                 Command="{Binding SignupCommand}"
                 HorizontalOptions="FillAndExpand"
-                TextColor="#051fa3"
+                BackgroundColor="#051fa3"
+                TextColor="#51feda"
                 />
         </StackLayout>
     </ContentPage.Content>

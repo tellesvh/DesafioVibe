@@ -53,10 +53,18 @@ namespace DesafioVibe.ViewModels
             }
         }
 
+        public Command SignupCommand
+        {
+            get
+            {
+                return new Command(Signup);
+            }
+        }
+
         private async void Login()
         {
             if (string.IsNullOrEmpty(CPF) || string.IsNullOrEmpty(Password))
-                await Application.Current.MainPage.DisplayAlert("Valores Vazios", "Por favor, verifique se todos os campos estão preenchidos.", "OK");
+                await Application.Current.MainPage.DisplayAlert("Há Valores Vazios", "Por favor, verifique se todos os campos estão preenchidos.", "OK");
             else
             {
                 MD5Helper md5 = new MD5Helper();
@@ -77,6 +85,11 @@ namespace DesafioVibe.ViewModels
                     await Application.Current.MainPage.DisplayAlert("Falha no login.", loginResponse.Message, "OK");
                 }
             }
+        }
+
+        private void Signup()
+        {
+           Application.Current.MainPage.Navigation.PushAsync(new SignupPage());
         }
     }
 }
