@@ -16,7 +16,7 @@
                 x:Name="lblName"
                 FontSize="22"
                 FontAttributes="Bold"
-                Text="-"
+                Text="{Binding Name}"
             />
 
             <Label
@@ -28,12 +28,8 @@
                 x:Name="lblCPF"
                 FontSize="22"
                 FontAttributes="Bold"
-                Text="-"
-            >
-                <!--<Label.Behaviors>
-                    <behaviorPack:MaskedBehavior Mask="XXX.XXX.XXX-XX" />
-                </Label.Behaviors>-->
-            </Label>
+                Text="{Binding CPF}"
+            />
 
             <Label
                 Margin="0,8,0,0"
@@ -44,19 +40,15 @@
                 x:Name="lblBirthday"
                 FontSize="22"
                 FontAttributes="Bold"
-                Text="-"
-            >
-                <!--<Label.Behaviors>
-                    <behaviorPack:MaskedBehavior Mask="XXX.XXX.XXX-XX" />
-                </Label.Behaviors>-->
-            </Label>
+                Text="{Binding Birthday}"
+            />
 
             <Button
                 Margin="0,8,0,0"
                 x:Name="btnExit"
                 Text="Encerrar Sessão"
                 FontSize="18"
-                Clicked="btnExitClicked"
+                Command="{Binding ExitCommand}"
                 TextColor="red" />
         </StackLayout>
     </ContentPage.Content>

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using DesafioVibe.Models;
+using MonkeyCache.LiteDB;
 using Newtonsoft.Json;
 
 namespace DesafioVibe.Webservice
@@ -37,6 +39,29 @@ namespace DesafioVibe.Webservice
             }
 
             return loginResponse;
+        }
+
+        public async Task<UserResponse> GetUserInfo()
+        {
+            UserResponse userResponse = null;
+            try
+            {
+                string userKey = Barrel.Current.Get<string>(Constants.USER_KEY);
+                string userCPF = Barrel.Current.Get<string>(Constants.USER_CPF);
+
+                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", userKey);
+                HttpResponseMessage response = await _client.GetAsync($"Usuario/{userCPF}");
+
+                string data = await response.Content.ReadAsStringAsync();
+                userResponse = JsonConvert.DeserializeObject<UserResponse>(data);
+                userResponse.StatusCode = (int)response.StatusCode;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("\tERROR {0}", ex.Message);
+            }
+
+            return userResponse;
         }
     }
 }

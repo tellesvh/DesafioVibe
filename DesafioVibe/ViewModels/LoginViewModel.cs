@@ -70,7 +70,7 @@ namespace DesafioVibe.ViewModels
                 if (loginResponse.StatusCode == 200)
                 {
                     Barrel.Current.Add(Constants.USER_KEY, loginResponse.Key, TimeSpan.Zero);
-                    Barrel.Current.Add(Constants.USER_CPF, CPF, TimeSpan.Zero);
+                    Barrel.Current.Add(Constants.USER_CPF, new string(CPF.Where(char.IsDigit).ToArray()), TimeSpan.Zero);
                     await Application.Current.MainPage.Navigation.PushAsync(new WelcomePage());
                 } else
                 {

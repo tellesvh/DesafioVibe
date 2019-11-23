@@ -1,4 +1,5 @@
 ﻿using System;
+using DesafioVibe.ViewModels;
 using MonkeyCache.LiteDB;
 using Xamarin.Forms;
 
@@ -6,16 +7,12 @@ namespace DesafioVibe.Views
 {
     public partial class ProfilePage : ContentPage
     {
+        ProfileViewModel profileViewModel;
         public ProfilePage()
         {
+            profileViewModel = new ProfileViewModel();
             InitializeComponent();
-        }
-
-        private void btnExitClicked(object sender, EventArgs e)
-        {
-            Barrel.Current.Empty(key: Constants.USER_KEY);
-            Barrel.Current.Empty(key: Constants.USER_CPF);
-            Navigation.PushAsync(new LoginPage());
+            BindingContext = profileViewModel;
         }
     }
 }
