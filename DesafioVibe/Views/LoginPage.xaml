@@ -1,27 +1,31 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="DesafioVibe.Views.LoginPage"
-             Title="Login">
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="DesafioVibe.Views.LoginPage"
+    Title="Login">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout
+            Padding="16,0,16,120"
+            VerticalOptions="Center"
+            >
             <Entry
                 x:Name="Email"
                 Placeholder="Email"
-                HeightRequest="40"
+                Text="{Binding Email}"
                 Keyboard="Email" />
             <Entry
                 x:Name="Password"
+                Text="{Binding Password}"
                 Placeholder="Senha"
-                HeightRequest="40"
                 IsPassword="True" />
             <Button
                 x:Name="btnLogin"
                 Text="Login"
-                Clicked="btnLogin_Clicked"
+                Command="{Binding LoginCommand}"
                 HorizontalOptions="FillAndExpand"
-                BackgroundColor="#088da5"
-                TextColor="White"
+                BackgroundColor="#051fa3"
+                TextColor="#51feda"
                 />
         </StackLayout>
     </ContentPage.Content>
