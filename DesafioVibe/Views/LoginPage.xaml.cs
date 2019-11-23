@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using Xamarin.Forms;
 
-namespace DesafioVibe.View
+namespace DesafioVibe.Views
 {
     public partial class LoginPage : ContentPage
     {

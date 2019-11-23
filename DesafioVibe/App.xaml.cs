@@ -1,7 +1,5 @@
-﻿using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using DesafioVibe.View;
+﻿using Xamarin.Forms;
+using DesafioVibe.Views;
 
 namespace DesafioVibe
 {
