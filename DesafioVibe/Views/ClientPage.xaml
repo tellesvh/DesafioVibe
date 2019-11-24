@@ -7,15 +7,62 @@
     NavigationPage.BackButtonTitle=""
     NavigationPage.HasBackButton="False">
     <ContentPage.ToolbarItems> 
-        <ToolbarItem Text="Perfil" Clicked="btnProfileClicked"/>
+        <ToolbarItem
+            Text="Perfil"
+            Command="{Binding OpenProfileCommand}"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <Label
-                Text="Olá!"
-                VerticalOptions="CenterAndExpand"
-                HorizontalOptions="CenterAndExpand"
-                />
+            <ListView
+                ItemsSource="{Binding Clients}"
+                CachingStrategy="RecycleElement"
+                VerticalOptions="FillAndExpand"
+                HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <StackLayout
+                                    Grid.Row="0"
+                                    VerticalOptions="FillAndExpand"
+                                    Padding="20,12,20,12">
+                                    <Label
+                                        Text="{Binding Name}"
+                                        Margin="0,0,0,-8"
+                                        FontSize="24"
+                                        FontAttributes="Bold" />
+                                    <StackLayout
+                                        Orientation="Horizontal">
+                                        <Label
+                                            TextColor="#051fa3"
+                                            FontAttributes="Bold"
+                                            Margin="0,0,0,-8">
+                                            <Label.Triggers>
+                                                <DataTrigger TargetType="Label" Binding="{Binding IsSpecial}" Value="True">
+                                                    <Setter Property="Text" Value="ESPECIAL"/>
+                                                </DataTrigger>
+                                                <DataTrigger TargetType="Label" Binding="{Binding IsSpecial}" Value="False">
+                                                    <Setter Property="IsVisible" Value="False"/>
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
+                                        <Label
+                                            Margin="0,0,0,-8"
+                                            Text="{Binding CPF}" />
+                                    </StackLayout>
+                                    <Label
+                                        Margin="0,0,0,-8"
+                                        Text="{Binding Id}" />
+                                </StackLayout>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
