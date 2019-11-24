@@ -5,102 +5,112 @@
     Title="Detalhes"
     x:Class="DesafioVibe.Views.ClientDetailPage">
     <ContentPage.Content>
-        <StackLayout
-            Padding="16,16,16,16">
+        <ScrollView>
+            <StackLayout
+                Padding="16,16,16,16">
 
-            <!-- TODO Falta Imagem -->
+                <Grid
+                    Margin="0,0,0,8"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <Image
+                        Source="{Binding ImgUrl}"
+                        Aspect="AspectFit"
+                    />
+                </Grid>
 
-            <Label
-                Text="Nome"
-            />
-            <Label
-                Margin="0,-8,0,0"
-                x:Name="lblName"
-                FontSize="24"
-                TextColor="Black"
-                FontAttributes="Bold"
-                Text="{Binding Name}"
-            />
+                <Label
+                    Text="Nome"
+                />
+                <Label
+                    Margin="0,-8,0,0"
+                    x:Name="lblName"
+                    FontSize="24"
+                    TextColor="Black"
+                    FontAttributes="Bold"
+                    Text="{Binding Name}"
+                />
 
-            <Label
-                Margin="0,8,0,0"
-                Text="CPF"
-            />
-            <Label
-                Margin="0,-8,0,0"
-                x:Name="lblCPF"
-                FontSize="24"
-                TextColor="Black"
-                FontAttributes="Bold"
-                Text="{Binding CPF}"
-            />
+                <Label
+                    Margin="0,8,0,0"
+                    Text="CPF"
+                />
+                <Label
+                    Margin="0,-8,0,0"
+                    x:Name="lblCPF"
+                    FontSize="24"
+                    TextColor="Black"
+                    FontAttributes="Bold"
+                    Text="{Binding CPF}"
+                />
 
-            <Label
-                Margin="0,8,0,0"
-                Text="Id"
-            />
-            <Label
-                Margin="0,-8,0,0"
-                x:Name="lblId"
-                FontSize="24"
-                TextColor="Black"
-                FontAttributes="Bold"
-                Text="{Binding Id}"
-            />
+                <Label
+                    Margin="0,8,0,0"
+                    Text="Id"
+                />
+                <Label
+                    Margin="0,-8,0,0"
+                    x:Name="lblId"
+                    FontSize="24"
+                    TextColor="Black"
+                    FontAttributes="Bold"
+                    Text="{Binding Id}"
+                />
 
-            <Label
-                Margin="0,8,0,0"
-                Text="Especial"
-            />
-            <Label
-                Margin="0,-8,0,0"
-                x:Name="lblSpecial"
-                FontSize="24"
-                TextColor="Black"
-                FontAttributes="Bold"
-                Text="{Binding Special}"
-            />
+                <Label
+                    Margin="0,8,0,0"
+                    Text="Especial"
+                />
+                <Label
+                    Margin="0,-8,0,0"
+                    x:Name="lblSpecial"
+                    FontSize="24"
+                    TextColor="Black"
+                    FontAttributes="Bold"
+                    Text="{Binding Special}"
+                />
 
-            <Label
-                Margin="0,8,0,0"
-                Text="Empresa"
-            />
-            <Label
-                Margin="0,-8,0,0"
-                x:Name="lblCompany"
-                FontSize="24"
-                TextColor="Black"
-                FontAttributes="Bold"
-                Text="{Binding Company}"
-            />
+                <Label
+                    Margin="0,8,0,0"
+                    Text="Empresa"
+                />
+                <Label
+                    Margin="0,-8,0,0"
+                    x:Name="lblCompany"
+                    FontSize="24"
+                    TextColor="Black"
+                    FontAttributes="Bold"
+                    Text="{Binding Company}"
+                />
 
-            <Label
-                Margin="0,8,0,0"
-                Text="Endereço"
-            />
-            <Label
-                Margin="0,-8,0,0"
-                x:Name="lblAddressFull"
-                FontSize="24"
-                TextColor="Black"
-                FontAttributes="Bold"
-                Text="{Binding AddressFull}"
-            />
-            <Label
-                Margin="0,-8,0,0"
-                x:Name="lblAddressComplement"
-                FontSize="18"
-                TextColor="Black"
-                FontAttributes="Bold"
-                Text="{Binding AddressComplement}"
-            />
-            <Label
-                Margin="0,-8,0,0"
-                x:Name="lblAddressCity"
-                FontSize="18"
-                TextColor="Black"
-                Text="{Binding AddressCity}"
-            />
-        </StackLayout>
+                <Label
+                    Margin="0,8,0,0"
+                    Text="Endereço"
+                />
+                <Label
+                    Margin="0,-8,0,0"
+                    x:Name="lblAddressFull"
+                    FontSize="24"
+                    TextColor="Black"
+                    FontAttributes="Bold"
+                    Text="{Binding AddressFull}"
+                />
+                <Label
+                    Margin="0,-8,0,0"
+                    x:Name="lblAddressComplement"
+                    FontSize="18"
+                    TextColor="Black"
+                    FontAttributes="Bold"
+                    Text="{Binding AddressComplement}"
+                />
+                <Label
+                    Margin="0,-8,0,0"
+                    x:Name="lblAddressCity"
+                    FontSize="18"
+                    TextColor="Black"
+                    Text="{Binding AddressCity}"
+                />
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

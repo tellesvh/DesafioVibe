@@ -61,6 +61,17 @@ namespace DesafioVibe.ViewModels
             }
         }
 
+        private string imgUrl;
+        public string ImgUrl
+        {
+            get { return imgUrl; }
+            set
+            {
+                imgUrl = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("ImgUrl"));
+            }
+        }
+
         private string company;
         public string Company
         {
@@ -113,6 +124,7 @@ namespace DesafioVibe.ViewModels
             special = _client.IsSpecial ? "Sim" : "Não";
 
             ClientDetailResponse clientDetailResponse = await _restService.GetDetailedClientInfo(_client.Id);
+            ImgUrl = clientDetailResponse.ImgUrl;
             Company = clientDetailResponse.Company;
             AddressFull = $"{clientDetailResponse.Address.Street}, {clientDetailResponse.Address.Number}";
             AddressComplement = clientDetailResponse.Address.Complement;

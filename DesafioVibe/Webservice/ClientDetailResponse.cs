@@ -6,7 +6,7 @@ namespace DesafioVibe.Webservice
     public class ClientDetailResponse
     {
         [JsonProperty("urlImagem")]
-        public string imgUrl { get; set; }
+        public string ImgUrl { get; set; }
 
         [JsonProperty("empresa")]
         public string Company { get; set; }
