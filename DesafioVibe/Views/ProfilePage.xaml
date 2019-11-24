@@ -14,7 +14,8 @@
             <Label
                 Margin="0,-8,0,0"
                 x:Name="lblName"
-                FontSize="22"
+                FontSize="24"
+                TextColor="Black"
                 FontAttributes="Bold"
                 Text="{Binding Name}"
             />
@@ -26,7 +27,8 @@
             <Label
                 Margin="0,-8,0,0"
                 x:Name="lblCPF"
-                FontSize="22"
+                FontSize="24"
+                TextColor="Black"
                 FontAttributes="Bold"
                 Text="{Binding CPF}"
             />
@@ -38,7 +40,8 @@
             <Label
                 Margin="0,-8,0,0"
                 x:Name="lblBirthday"
-                FontSize="22"
+                FontSize="24"
+                TextColor="Black"
                 FontAttributes="Bold"
                 Text="{Binding Birthday}"
             />
@@ -48,6 +51,7 @@
                 x:Name="btnExit"
                 Text="Encerrar Sessão"
                 FontSize="18"
+                BackgroundColor="White"
                 Command="{Binding ExitCommand}"
                 TextColor="red" />
         </StackLayout>

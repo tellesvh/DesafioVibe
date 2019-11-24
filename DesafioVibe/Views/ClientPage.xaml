@@ -2,8 +2,10 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
     x:Class="DesafioVibe.Views.ClientPage"
     Title="Clientes"
+    ios:Page.UseSafeArea="True"
     NavigationPage.BackButtonTitle=""
     NavigationPage.HasBackButton="False">
     <ContentPage.ToolbarItems> 
@@ -34,6 +36,7 @@
                                         Text="{Binding Name}"
                                         Margin="0,0,0,-8"
                                         FontSize="24"
+                                        TextColor="Black"
                                         FontAttributes="Bold" />
                                     <StackLayout
                                         Orientation="Horizontal">
