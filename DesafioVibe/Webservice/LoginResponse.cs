@@ -12,17 +12,5 @@ namespace DesafioVibe.Webservice
         public string Key { get; set; }
 
         public int StatusCode { get; set; }
-
-        //[JsonProperty("weather")]
-        //public Weather[] Weather { get; set; }
-
-        //[JsonProperty("main")]
-        //public Main Main { get; set; }
-
-        //[JsonProperty("visibility")]
-        //public long Visibility { get; set; }
-
-        //[JsonProperty("wind")]
-        //public Wind Wind { get; set; }
     }
 }

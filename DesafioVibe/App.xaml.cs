@@ -16,7 +16,7 @@ namespace DesafioVibe
 
             if (userKey != null)
             {
-                MainPage = new NavigationPage(new WelcomePage());
+                MainPage = new NavigationPage(new ClientPage());
             } else
             {
                 MainPage = new NavigationPage(new LoginPage());

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -91,6 +92,28 @@ namespace DesafioVibe.Webservice
             }
 
             return userResponse;
+        }
+
+        public async Task<List<ClientResponse>> GetClientList()
+        {
+            List<ClientResponse> clientResponse = null;
+            try
+            {
+                string userKey = Barrel.Current.Get<string>(Constants.USER_KEY);
+                string userCPF = Barrel.Current.Get<string>(Constants.USER_CPF);
+
+                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", userKey);
+                HttpResponseMessage response = await _client.GetAsync($"Cliente");
+
+                string data = await response.Content.ReadAsStringAsync();
+                clientResponse = JsonConvert.DeserializeObject<List<ClientResponse>>(data);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("\tERROR {0}", ex.Message);
+            }
+
+            return clientResponse;
         }
     }
 }

@@ -2,8 +2,8 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="DesafioVibe.Views.WelcomePage"
-    Title="Bem vindo(a)!"
+    x:Class="DesafioVibe.Views.ClientPage"
+    Title="Clientes"
     NavigationPage.BackButtonTitle=""
     NavigationPage.HasBackButton="False">
     <ContentPage.ToolbarItems> 
