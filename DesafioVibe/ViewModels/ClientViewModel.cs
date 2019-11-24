@@ -15,6 +15,13 @@ namespace DesafioVibe.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
         RestService _restService;
 
+        public ClientViewModel()
+        {
+            _restService = new RestService();
+            Clients = new ObservableCollection<ClientResponse>();
+            GetClientList();
+        }
+
         private ObservableCollection<ClientResponse> clients;
         public ObservableCollection<ClientResponse> Clients
         {
@@ -36,11 +43,25 @@ namespace DesafioVibe.ViewModels
             }
         }
 
-        public ClientViewModel()
+        private ClientResponse _selectedClient;
+        public ClientResponse SelectedClient
         {
-            _restService = new RestService();
-            Clients = new ObservableCollection<ClientResponse>();
-            GetClientList();
+            get { return _selectedClient; }
+            set
+            {
+                if (value == _selectedClient)
+                    return;
+                _selectedClient = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("SelectedClient"));
+                if (!CrossConnectivity.Current.IsConnected)
+                {
+                    Application.Current.MainPage.DisplayAlert("Atenção", "Esta funcionalidade está indisponível pois você não está conectado à internet.", "OK");
+                }
+                else
+                {
+                    Application.Current.MainPage.Navigation.PushAsync(new ClientDetailPage(_selectedClient));
+                }
+            }
         }
 
         public Command OpenProfileCommand

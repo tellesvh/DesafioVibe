@@ -115,5 +115,26 @@ namespace DesafioVibe.Webservice
 
             return clientResponse;
         }
+
+        public async Task<ClientDetailResponse> GetDetailedClientInfo(string clientId)
+        {
+            ClientDetailResponse clientDetailResponse = null;
+            try
+            {
+                string userKey = Barrel.Current.Get<string>(Constants.USER_KEY);
+
+                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", userKey);
+                HttpResponseMessage response = await _client.GetAsync($"Cliente/{clientId}");
+
+                string data = await response.Content.ReadAsStringAsync();
+                clientDetailResponse = JsonConvert.DeserializeObject<ClientDetailResponse>(data);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("\tERROR {0}", ex.Message);
+            }
+
+            return clientDetailResponse;
+        }
     }
 }

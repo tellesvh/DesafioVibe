@@ -22,7 +22,8 @@
                 HasUnevenRows="True"
                 IsPullToRefreshEnabled="True"
                 RefreshCommand="{Binding RefreshListCommand}"
-                IsRefreshing="{Binding IsListRefreshing}">
+                IsRefreshing="{Binding IsListRefreshing}"
+                SelectedItem="{Binding SelectedClient, Mode=TwoWay}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
