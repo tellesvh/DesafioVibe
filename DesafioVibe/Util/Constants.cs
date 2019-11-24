@@ -7,5 +7,6 @@ namespace DesafioVibe
 
         public static string USER_KEY = "user-key";
         public static string USER_CPF = "user-cpf";
+        public static string CLIENTS = "clients";
     }
 }

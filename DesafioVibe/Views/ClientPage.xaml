@@ -19,7 +19,10 @@
                 ItemsSource="{Binding Clients}"
                 CachingStrategy="RecycleElement"
                 VerticalOptions="FillAndExpand"
-                HasUnevenRows="True">
+                HasUnevenRows="True"
+                IsPullToRefreshEnabled="True"
+                RefreshCommand="{Binding RefreshListCommand}"
+                IsRefreshing="{Binding IsListRefreshing}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

@@ -6,6 +6,7 @@ using DesafioVibe.Views;
 using DesafioVibe.Webservice;
 using MonkeyCache.LiteDB;
 using Xamarin.Forms;
+using Plugin.Connectivity;
 
 namespace DesafioVibe.ViewModels
 {
@@ -24,12 +25,22 @@ namespace DesafioVibe.ViewModels
             }
         }
 
+        private bool _isRefreshing = false;
+        public bool IsRefreshing
+        {
+            get { return _isRefreshing; }
+            set
+            {
+                _isRefreshing = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("IsListRefreshing"));
+            }
+        }
+
         public ClientViewModel()
         {
             _restService = new RestService();
-            GetClientList();
             Clients = new ObservableCollection<ClientResponse>();
-
+            GetClientList();
         }
 
         public Command OpenProfileCommand
@@ -45,11 +56,54 @@ namespace DesafioVibe.ViewModels
             Application.Current.MainPage.Navigation.PushAsync(new ProfilePage());
         }
 
+        public Command RefreshListCommand
+        {
+            get
+            {
+                return new Command(RefreshList);
+            }
+        }
+
         private async void GetClientList()
         {
-            List<ClientResponse> clientResponse = await _restService.GetClientList();
-            foreach (ClientResponse client in clientResponse)
-                Clients.Add(client);
+            if (!CrossConnectivity.Current.IsConnected)
+            {
+                List<ClientResponse> cacheClients = Barrel.Current.Get<List<ClientResponse>>(Constants.CLIENTS);
+                foreach (ClientResponse client in cacheClients)
+                    Clients.Add(client);
+                Device.BeginInvokeOnMainThread(async () => await Application.Current.MainPage.DisplayAlert("Atenção", "Você não está conectado à internet, portanto, esta listagem é offline. Recarregue a lista puxando-a para cima.", "OK"));      
+            }
+            else
+            {
+                List<ClientResponse> clientResponse = await _restService.GetClientList();
+                Barrel.Current.Add(Constants.CLIENTS, clientResponse, TimeSpan.Zero);
+                foreach (ClientResponse client in clientResponse)
+                    Clients.Add(client);
+            }
+        }
+
+        private async void RefreshList()
+        {
+            IsRefreshing = true;
+
+            if (!CrossConnectivity.Current.IsConnected)
+            {
+                await Application.Current.MainPage.DisplayAlert("Atenção", "Você não está conectado à internet. Não é possível atualizar a lista.", "OK");
+            }
+            else
+            {
+                List<ClientResponse> clientResponse = await _restService.GetClientList();
+                if (clientResponse.Count > 0)
+                {
+                    Barrel.Current.Add(Constants.CLIENTS, clientResponse, TimeSpan.Zero);
+                    Clients.Clear();
+                    foreach (ClientResponse client in clientResponse)
+                        Clients.Add(client);
+                }
+                
+            }
+
+            IsRefreshing = false;
         }
     }
 }
